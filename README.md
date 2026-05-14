@@ -50,7 +50,7 @@ is accessible at `http://localhost:8000`.
 
 ## Project Structure
 
-```
+```text
 cash-tracker/
 ├── .github/             # GitHub Actions workflows, issue and PR templates
 ├── .vscode/             # Editor recommendations (not enforced)
