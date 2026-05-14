@@ -46,7 +46,7 @@ the right-sized tool for the system.
 
 ### Pros and Cons of the Options
 
-**Option 1 — Docker Compose**
+#### Option 1 — Docker Compose
 
 - ✅ Operational footprint matches the team size (one engineer)
 - ✅ Zero control plane overhead (no etcd, no API server, no kubelet)
@@ -55,7 +55,7 @@ the right-sized tool for the system.
 - ❌ No native multi-host scaling (acceptable trade-off, see Consequences)
 - ❌ No built-in self-healing across nodes (single host, not applicable)
 
-**Option 2 — Kubernetes self-managed (k3s)**
+#### Option 2 — Kubernetes self-managed (k3s)
 
 - ✅ Industry-standard skill
 - ❌ Requires running and maintaining the control plane (additional CPU/RAM
@@ -64,7 +64,7 @@ the right-sized tool for the system.
   value at this scale
 - ❌ Operational complexity disproportionate to the problem
 
-**Option 3 — Amazon EKS**
+#### Option 3 — Amazon EKS
 
 - ✅ Fully managed control plane
 - ❌ ~$73/month for the control plane alone, regardless of workload

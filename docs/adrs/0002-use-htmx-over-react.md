@@ -47,7 +47,7 @@ types and TypeScript types. Everything lives in Python and Jinja2 templates.
 
 ### Pros and Cons of the Options
 
-**Option 1 — HTMX + Jinja2**
+#### Option 1 — HTMX + Jinja2
 
 - ✅ Single language across the stack (Python)
 - ✅ No build pipeline for the frontend; no Node, no bundler, no transpiler
@@ -58,7 +58,7 @@ types and TypeScript types. Everything lives in Python and Jinja2 templates.
 - ❌ Limited to applications where server round-trips per interaction are
   acceptable
 
-**Option 2 — React SPA**
+#### Option 2 — React SPA
 
 - ✅ Industry-standard for complex interactive UIs
 - ✅ Rich ecosystem (component libraries, state management, devtools)
@@ -68,7 +68,7 @@ types and TypeScript types. Everything lives in Python and Jinja2 templates.
 - ❌ Adds bundle size, hydration cost, and client-side complexity for a UI
   that does not need any of it
 
-**Option 3 — Plain Jinja2 (no HTMX)**
+#### Option 3 — Plain Jinja2 (no HTMX)
 
 - ✅ Maximum simplicity
 - ❌ Every interaction requires a full page reload, which is jarring on mobile

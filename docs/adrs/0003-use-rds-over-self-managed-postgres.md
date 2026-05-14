@@ -49,7 +49,7 @@ would have to write, monitor, and verify ourselves.
 
 ### Pros and Cons of the Options
 
-**Option 1 — AWS RDS**
+#### Option 1 — AWS RDS
 
 - ✅ Automated daily backups with configurable retention (default 7 days)
 - ✅ Point-in-time recovery to the second within the backup window
@@ -60,7 +60,7 @@ would have to write, monitor, and verify ourselves.
 - ❌ More expensive than self-managed after the Free Tier (~$15–25/month)
 - ❌ AWS lock-in for the database layer
 
-**Option 2 — Containerized PostgreSQL on the same EC2**
+#### Option 2 — Containerized PostgreSQL on the same EC2
 
 - ✅ Cheaper post-Free-Tier
 - ✅ No additional AWS service to learn or configure
@@ -70,7 +70,7 @@ would have to write, monitor, and verify ourselves.
 - ❌ Storage durability limited to a single EBS volume
 - ❌ All maintenance (patches, vacuum, monitoring) is manual
 
-**Option 3 — Self-managed PostgreSQL on a separate EC2**
+#### Option 3 — Self-managed PostgreSQL on a separate EC2
 
 - ✅ Separates failure domains
 - ✅ Cheaper than RDS post-Free-Tier
