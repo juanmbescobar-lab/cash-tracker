@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charliermarsh.ruff",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "hashicorp.terraform",
+    "redhat.vscode-yaml",
+    "github.vscode-github-actions",
+    "eamodio.gitlens",
+    "yzhang.markdown-all-in-one",
+    "editorconfig.editorconfig",
+    "bierner.markdown-mermaid"
+  ]
+}
