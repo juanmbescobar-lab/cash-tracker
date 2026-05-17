@@ -179,6 +179,15 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+# === SQLite ===
+*.db
+*.db-shm
+*.db-wal
+
+# === Coverage ===
+coverage.xml
+.coverage
+
 # === Secrets ===
 *.pem
 *.key
