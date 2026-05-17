@@ -81,7 +81,8 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+# .python-version is intentionally tracked to pin the project Python version
+# .python-version
 
 # pipenv
 Pipfile.lock
@@ -177,6 +178,15 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# === SQLite ===
+*.db
+*.db-shm
+*.db-wal
+
+# === Coverage ===
+coverage.xml
+.coverage
 
 # === Secrets ===
 *.pem
