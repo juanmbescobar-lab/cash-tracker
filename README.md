@@ -43,10 +43,49 @@ provided by a self-hosted Prometheus + Grafana stack.
 
 ## Quick Start (Local Development)
 
-> _TBD — local Docker Compose setup is added in Phase 2._
+### Prerequisites
 
-The intended developer experience is `docker compose up` and the application
-is accessible at `http://localhost:8000`.
+- WSL2 with Ubuntu 24.04 (or any Linux / macOS)
+- Python 3.12 (managed by `uv`)
+- [`uv`](https://docs.astral.sh/uv/) installed: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+### Setup
+
+```bash
+# Install dependencies (creates .venv automatically)
+uv sync
+
+# Create your local environment file from the template
+cp .env.example .env
+
+# Run the app
+uv run uvicorn app.main:app --reload --port 8000
+```
+
+The API will be available at `http://localhost:8000`. Interactive docs at
+`http://localhost:8000/docs`.
+
+### Useful commands
+
+```bash
+# Run tests with coverage
+uv run pytest
+
+# Lint
+uv run ruff check .
+
+# Format check
+uv run ruff format --check .
+
+# Apply formatting
+uv run ruff format .
+
+# Type check
+uv run mypy app/
+```
+
+> Note: PostgreSQL via Docker Compose is introduced in Phase 2. Phase 1
+> uses SQLite (file: `cash_tracker.db`).
 
 ## Project Structure
 
