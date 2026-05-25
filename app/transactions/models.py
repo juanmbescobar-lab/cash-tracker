@@ -48,7 +48,7 @@ class Transaction(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     type: Mapped[TransactionType] = mapped_column(
-        Enum(TransactionType, name="transaction_type"),
+        Enum(TransactionType, name="transaction_type", validate_strings=True),
         nullable=False,
     )
     amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)

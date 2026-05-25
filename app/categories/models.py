@@ -44,6 +44,7 @@ class Category(Base):
     transactions: Mapped[list[Transaction]] = relationship(
         back_populates="category",
         lazy="raise",
+        passive_deletes=True,
     )
 
     def __repr__(self) -> str:

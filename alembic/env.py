@@ -36,9 +36,8 @@ def _import_models() -> None:
 
     Add new imports here when a new domain module introduces models.
     """
-    # Future imports go here, e.g.:
-    # from app.transactions import models
-    # from app.categories import models
+    from app.categories import models as _categories_models  # noqa: F401
+    from app.transactions import models as _transactions_models  # noqa: F401
 
 
 def run_migrations_offline() -> None:
