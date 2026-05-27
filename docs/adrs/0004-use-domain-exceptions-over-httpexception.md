@@ -54,7 +54,7 @@ concrete benefits:
 
 ### Pros and Cons of the Options
 
-**Option 1 — Raise ``HTTPException`` directly**
+#### Option 1 — Raise ``HTTPException`` directly**
 
 - ✅ Simpler: fewer files, one less layer of indirection
 - ✅ No exception handler boilerplate
@@ -62,7 +62,7 @@ concrete benefits:
 - ❌ Tests require ``TestClient`` even for pure business logic
 - ❌ HTTP status code decisions scattered across service functions
 
-**Option 2 — Custom domain exceptions (chosen)**
+#### Option 2 — Custom domain exceptions (chosen)**
 
 - ✅ Services are HTTP-agnostic and reusable
 - ✅ Unit-testable without ``TestClient``

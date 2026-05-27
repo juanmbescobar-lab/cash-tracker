@@ -75,6 +75,7 @@ query parameters. Responses include `items`, `total`, `skip`, and `limit`.
 ### Error responses
 
 The API returns `{"detail": "..."}` with appropriate status codes:
+
 - `404 Not Found` — resource does not exist
 - `409 Conflict` — uniqueness or referential integrity violation
 - `422 Unprocessable Entity` — validation failure or business rule violation
