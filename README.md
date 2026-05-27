@@ -41,6 +41,50 @@ provided by a self-hosted Prometheus + Grafana stack.
 | CI/CD             | GitHub Actions            | Native integration, free for public repos                | —       |
 | Hosting           | AWS EC2 t3.micro          | Within Free Tier for year one                            | —       |
 
+## API Endpoints (Phase 1)
+
+The backend exposes a REST API for managing categories and transactions.
+Interactive documentation is available at `/docs` (Swagger UI) when the
+app is running.
+
+### Categories
+
+| Method | Path                  | Description                |
+|--------|-----------------------|----------------------------|
+| GET    | `/categories`         | List with pagination       |
+| POST   | `/categories`         | Create                     |
+| GET    | `/categories/{id}`    | Get by id                  |
+| PATCH  | `/categories/{id}`    | Partial update             |
+| DELETE | `/categories/{id}`    | Delete (if no transactions)|
+
+### Transactions
+
+| Method | Path                    | Description                |
+|--------|-------------------------|----------------------------|
+| GET    | `/transactions`         | List with pagination       |
+| POST   | `/transactions`         | Create                     |
+| GET    | `/transactions/{id}`    | Get by id                  |
+| PATCH  | `/transactions/{id}`    | Partial update             |
+| DELETE | `/transactions/{id}`    | Delete                     |
+
+### Pagination
+
+List endpoints accept `skip` (default 0) and `limit` (default 50, max 200)
+query parameters. Responses include `items`, `total`, `skip`, and `limit`.
+
+### Error responses
+
+The API returns `{"detail": "..."}` with appropriate status codes:
+
+- `404 Not Found` — resource does not exist
+- `409 Conflict` — uniqueness or referential integrity violation
+- `422 Unprocessable Entity` — validation failure or business rule violation
+
+See [ADR-0004](docs/adrs/0004-use-domain-exceptions-over-httpexception.md)
+for the rationale behind the error translation strategy.
+
+---
+
 ## Quick Start (Local Development)
 
 ### Prerequisites
