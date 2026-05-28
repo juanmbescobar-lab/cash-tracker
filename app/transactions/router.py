@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, status
+from datetime import date
+
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.dependencies import PaginationParams, pagination_params
 from app.transactions import service
+from app.transactions.enums import TransactionType
 from app.transactions.schemas import (
     PaginatedTransactionRead,
     TransactionCreate,
@@ -31,13 +34,29 @@ def create_transaction(data: TransactionCreate, db: Session = Depends(get_db)) -
 @router.get(
     "",
     response_model=PaginatedTransactionRead,
-    summary="List transactions with pagination",
+    summary="List transactions with pagination and optional filters",
 )
 def list_transactions(
     pagination: PaginationParams = Depends(pagination_params),
+    from_date: date | None = Query(
+        default=None, description="Include transactions on or after this date"
+    ),
+    to_date: date | None = Query(
+        default=None, description="Include transactions on or before this date"
+    ),
+    category_id: int | None = Query(default=None, description="Filter by category id"),
+    type: TransactionType | None = Query(default=None, description="Filter by transaction type"),
     db: Session = Depends(get_db),
 ) -> PaginatedTransactionRead:
-    items, total = service.list_transactions(db, skip=pagination.skip, limit=pagination.limit)
+    items, total = service.list_transactions(
+        db,
+        skip=pagination.skip,
+        limit=pagination.limit,
+        from_date=from_date,
+        to_date=to_date,
+        category_id=category_id,
+        txn_type=type,
+    )
     return PaginatedTransactionRead(
         items=[TransactionRead.model_validate(t) for t in items],
         total=total,

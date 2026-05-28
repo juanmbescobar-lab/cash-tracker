@@ -7,6 +7,8 @@ Eagerly loads the related Category in all read paths via
 
 from __future__ import annotations
 
+from datetime import date
+
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session, selectinload
 
@@ -51,17 +53,40 @@ def get_transaction(db: Session, transaction_id: int) -> Transaction:
     return _get_with_category(db, transaction_id)
 
 
-def list_transactions(db: Session, skip: int = 0, limit: int = 50) -> tuple[list[Transaction], int]:
-    """Return (transactions, total_count) with categories eagerly loaded.
+def list_transactions(
+    db: Session,
+    skip: int = 0,
+    limit: int = 50,
+    from_date: date | None = None,
+    to_date: date | None = None,
+    category_id: int | None = None,
+    txn_type: TransactionType | None = None,
+) -> tuple[list[Transaction], int]:
+    """Return (transactions, total_count) with optional filters.
 
-    Transactions are ordered by date descending, then by id descending,
-    so the most recently entered transactions appear first within a day.
+    Filters (all optional, combinable):
+    - from_date / to_date: inclusive date range
+    - category_id: restrict to a single category
+    - txn_type: restrict to income or expense
+
+    Transactions are ordered by date descending, then id descending.
     """
-    total = db.execute(select(func.count(Transaction.id))).scalar_one()
+    filters = []
+    if from_date is not None:
+        filters.append(Transaction.date >= from_date)
+    if to_date is not None:
+        filters.append(Transaction.date <= to_date)
+    if category_id is not None:
+        filters.append(Transaction.category_id == category_id)
+    if txn_type is not None:
+        filters.append(Transaction.type == txn_type)
+
+    total = db.execute(select(func.count(Transaction.id)).where(*filters)).scalar_one()
     items = list(
         db.execute(
             select(Transaction)
             .options(selectinload(Transaction.category))
+            .where(*filters)
             .order_by(Transaction.date.desc(), Transaction.id.desc())
             .offset(skip)
             .limit(limit)
