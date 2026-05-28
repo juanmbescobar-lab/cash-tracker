@@ -9,6 +9,7 @@ from __future__ import annotations
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
+from app.balance.router import router as balance_router
 from app.categories.router import router as categories_router
 from app.core.config import get_settings
 from app.core.exceptions import (
@@ -59,6 +60,7 @@ async def _handle_business_rule(_: Request, exc: BusinessRuleError) -> JSONRespo
 # Mount feature routers.
 app.include_router(categories_router)
 app.include_router(transactions_router)
+app.include_router(balance_router)
 
 
 @app.get("/health", tags=["meta"])
