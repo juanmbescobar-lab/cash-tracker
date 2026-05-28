@@ -67,6 +67,22 @@ app is running.
 | PATCH  | `/transactions/{id}`    | Partial update             |
 | DELETE | `/transactions/{id}`    | Delete                     |
 
+### Balance
+
+| Method | Path                            | Description                      |
+|--------|---------------------------------|----------------------------------|
+| GET    | `/balance/current`              | Balance for the current month    |
+| GET    | `/balance/month/{year}/{month}` | Balance for a specific month     |
+| GET    | `/balance/history`              | Month-over-month balance history |
+
+Balance figures are computed dynamically from transactions (see
+[ADR-0005](docs/adrs/0005-compute-balance-dynamically.md)). Each monthly
+balance includes income and expense totals, net result, the running
+balance carried from previous months, and an expense breakdown by category.
+
+The transactions list endpoint additionally accepts `from_date`,
+`to_date`, `category_id`, and `type` query parameters for filtering.
+
 ### Pagination
 
 List endpoints accept `skip` (default 0) and `limit` (default 50, max 200)
